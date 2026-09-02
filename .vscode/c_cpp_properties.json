@@ -1,0 +1,18 @@
+{
+    "configurations": [
+        {
+            "name": "Wii",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "/opt/devkitpro/libogc/include",
+                "/opt/devkitpro/devkitPPC/powerpc-eabi/include"
+            ],
+            "defines": ["GEKKO", "HW_RVL"],
+            "compilerPath": "/opt/devkitpro/devkitPPC/bin/powerpc-eabi-gcc",
+            "cStandard": "gnu17",
+            "cppStandard": "gnu++17",
+            "intelliSenseMode": "linux-gcc-x86"
+        }
+    ],
+    "version": 4
+}

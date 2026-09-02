@@ -1,0 +1,32 @@
+# --- Artefactos de compilación de devkitPro ---
+build/
+*.elf
+*.dol
+*.map
+
+# Si en algún momento compilas también para 3DS en el mismo repo
+*.3dsx
+*.smdh
+*.cia
+
+# --- Objetos intermedios de compilación ---
+*.o
+*.a
+*.d
+
+# --- VS Code ---
+# El .vscode/ normalmente SÍ conviene versionarlo en este proyecto,
+# porque contiene la config de IntelliSense (c_cpp_properties.json)
+# y las tasks (tasks.json) que ayudan a cualquiera que clone el repo.
+# Si prefieres no compartir tu configuración personal, descomenta esto:
+# .vscode/
+
+# --- Dev Containers ---
+# El .devcontainer/ SÍ se debe versionar siempre —
+# es lo que permite que cualquiera reproduzca tu entorno de desarrollo.
+
+# --- Sistema operativo / editor ---
+.DS_Store
+Thumbs.db
+*.swp
+*~
