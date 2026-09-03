@@ -20,6 +20,8 @@ BUILD		:=	build
 SOURCES		:=	source
 DATA		:=	data
 INCLUDES	:=
+APP_NAME := HelloWiiChaconMoon
+DIST_DIR := dist/$(APP_NAME)
 
 #---------------------------------------------------------------------------------
 # options for code generation
@@ -93,7 +95,6 @@ export INCLUDE	:=	$(foreach dir,$(INCLUDES), -iquote $(CURDIR)/$(dir)) \
 export LIBPATHS	:= -L$(LIBOGC_LIB) $(foreach dir,$(LIBDIRS),-L$(dir)/lib)
 
 export OUTPUT	:=	$(CURDIR)/$(TARGET)
-.PHONY: $(BUILD) clean
 
 #---------------------------------------------------------------------------------
 $(BUILD):
@@ -101,9 +102,20 @@ $(BUILD):
 	@$(MAKE) --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile
 
 #---------------------------------------------------------------------------------
+.PHONY: $(BUILD) clean run package
+
+package: $(OUTPUT).dol
+	mkdir -p $(DIST_DIR)
+	cp $(OUTPUT).dol $(DIST_DIR)/boot.dol
+	cp meta.xml $(DIST_DIR)/meta.xml
+	cp icon.png $(DIST_DIR)/icon.png
+	cd dist && zip -r $(APP_NAME).zip $(APP_NAME)
+
+#---------------------------------------------------------------------------------
 clean:
 	@echo clean ...
 	@rm -fr $(BUILD) $(OUTPUT).elf $(OUTPUT).dol
+	@rm -fr dist
 
 #---------------------------------------------------------------------------------
 run:
