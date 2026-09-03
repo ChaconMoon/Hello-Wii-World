@@ -122,7 +122,7 @@ int main(int argc, char **argv)
         \x1b[2;0 es simplemente una orden que mueve el cursor que imprimer el texto a la fila 2 para que no aparezca en la esquina superior de la pantalla simplemente pegado.
 
         */
-        printf("Hola Mundo, soy Carlos Chacon desde una Wii (https://github.com/ChaconMoon)\n");
+        printf("Hola Mundo, soy Carlos Chacon desde una Wii (https://github.com/ChaconMoon/Hello-Wii-World)\n");
         printf("Pulsa el boton HOME para salir del programa.");
 
         while (runProgram)
@@ -147,7 +147,14 @@ int main(int argc, char **argv)
                 */
                 if (buttomPressed & WPAD_BUTTON_HOME)
                 {
+                        /* Damos la orden de parar la ejecución del programa*/
                         runProgram = false;
+                        /* Pone toda la pantalla a negro*/
+                        VIDEO_SetBlack(TRUE);
+
+                        /* Escribimos el buffer de datos en la pantalla y sincronizamos*/
+                        VIDEO_Flush();
+                        VIDEO_WaitVSync();
                 }
         }
 
