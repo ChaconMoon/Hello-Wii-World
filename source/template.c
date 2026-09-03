@@ -1,5 +1,23 @@
+/*
+Librería estándar input/output de C.
+*/
 #include <stdio.h>
+
+/*
+Librería de devkitpro que permite usar acciones del Wiimote, botones, acelerómetro, sensor de infrarrojos, etc.
+*/
+#include <wiiuse/wpad.h>
+
+/*
+Librería estándar que nos otorga los métodos para trabajar en la wii, el buffer de video, el sistema, el audio,
+los mandos de Gamecube, el lector de disco y networking básico.
+*/
 #include <gccore.h>
+
+/*
+Librería estándar que maneja los bool
+*/
+#include <stdbool.h>
 /*
 Es el eXternal FrameBuffer, es el lienzo que se dibuja,
 aqui es donde se "prepara" la imagen que posteriormente va a enviar a la Wii
@@ -23,8 +41,12 @@ El tema de recibir parametros con argc y argv no se usa en Wii apenas, pero se s
 */
 int main(int argc, char **argv)
 {
+        bool runProgram = true;
         /* Inicia el sistema de video de la Wii  */
         VIDEO_Init();
+
+        /* Inicia el controlador de los Wiimotes*/
+        WPAD_Init();
 
         /*
         Esta función detecta automaticamente el modo en el que esta funcionando el video de la tele.
@@ -100,14 +122,33 @@ int main(int argc, char **argv)
         \x1b[2;0 es simplemente una orden que mueve el cursor que imprimer el texto a la fila 2 para que no aparezca en la esquina superior de la pantalla simplemente pegado.
 
         */
-        printf("Hola Mundo, soy Carlos Chacon desde una Wii (https://github.com/ChaconMoon)");
+        printf("Hola Mundo, soy Carlos Chacon desde una Wii (https://github.com/ChaconMoon)\n");
+        printf("Pulsa el boton HOME para salir del programa.");
 
-        while (1)
+        while (runProgram)
         {
+                /* Se escanean los mandos en cada ciclo de la aplicación*/
+                WPAD_ScanPads();
+
+                /*Accedes a los botones que ha pulsado el primer mando, es decir el mando 1 */
+                u32 buttomPressed = WPAD_ButtonsDown(0);
+
                 /*
                 Ejecuta VIDEO_WaitSync en cada vuelta del programa actualice la pantalla indefinidamente.
                 */
                 VIDEO_WaitVSync();
+
+                /*
+                En los mandos de la Web el valor del mando se representa como un valor de 32 bits con "32" posibles pulsaciones de mando, en los que cada pulsación activa uno de los bits.
+                Aqui estamos comprobando si los botones pulsados, WPAD_BUTTON_HOME es una constante que contiene el valor en bits si se ha pulsado el botón home.
+
+                Al hacer una operación AND con el valor si el botón home esta pulsado estamos comprobando si el bit del botón esta siendo pulsado porque este operador devolverá un número distinto de a 0.
+                Es decir si los inputs contienen el bit que buscamos entramos en el bloque de la condición.
+                */
+                if (buttomPressed & WPAD_BUTTON_HOME)
+                {
+                        runProgram = false;
+                }
         }
 
         return 0;

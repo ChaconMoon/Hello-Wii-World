@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<app version="1.0">
-    <name>Hello World</name>
-    <version>1.0</version>
-    <release_date>20260902000000</release_date>
-    <coder>Carlos</coder>
-    <short_description>Mi primer homebrew</short_description>
-    <long_description>Un simple Hello World para aprender desarrollo homebrew en Wii.</long_description>
-</app>
