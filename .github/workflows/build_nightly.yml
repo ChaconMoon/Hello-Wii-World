@@ -1,0 +1,29 @@
+name: New Release Wii World
+
+on:     
+  push:
+    branches: ["master"]
+  workflow_dispatch:
+permissions:
+        contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: devkitpro/devkitppc:latest
+    steps:
+      - name: Clone repo
+        uses: actions/checkout@v4
+
+      - name: run Makefile
+        run: make
+      
+      - name: create package
+        run: make package
+
+      - name: Upload to GitHub Releases (Nightly)
+        uses: softprops/action-gh-release@v2
+        with:
+                tag_name: "latest"
+                name: "Versión de subida de prueba Wii Helo World"
+                body: "ESta release se actualiza automaticamente con cada versión estable"
+                files: ./dist/HelloWiiChaconMoon.zip
