@@ -122,8 +122,8 @@ int main(int argc, char **argv)
         \x1b[2;0 es simplemente una orden que mueve el cursor que imprimer el texto a la fila 2 para que no aparezca en la esquina superior de la pantalla simplemente pegado.
 
         */
-        printf("Hola Mundo, soy Carlos Chacon desde una Wii (https://github.com/ChaconMoon/Hello-Wii-World)\n");
-        printf("Pulsa el boton HOME para salir del programa.");
+        printf("\x1b[0;2HHola Mundo, soy Carlos Chacon desde una Wii\x1b[2;2H(https://github.com/ChaconMoon/Hello-Wii-World)");
+        printf("\x1b[4;2H\x1b[4mPulsa el boton HOME para salir del programa.");
 
         while (runProgram)
         {
