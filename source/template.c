@@ -96,7 +96,7 @@ int main(int argc, char **argv)
         VIDEO_SetNextFramebuffer(xfb);
 
         /*
-        Le estamos indicando que no deje la pantalla en negro mientras corga, necesitariamos hacer esto mientras carga algo, pero como no es el caso.
+        Le estamos indicando que no deje la pantalla en negro mientras carga, necesitariamos hacer esto mientras carga algo, pero como no es el caso.
         */
         VIDEO_SetBlack(FALSE);
 
